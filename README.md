@@ -41,7 +41,11 @@ If you like to get the latest version automatically, just add the composer repos
 `composer require cookiekiller/easydd @dev-master`
 
 # Works with
-Currently Firefox and Chrome. Haven't tested with any other browser yet.
+I verified:
+* Firefox 37+
+* Chrome 42+
+
+Haven't tested with any other browser yet.
 
 # Contributing?
 Please support that library by testing and improving.

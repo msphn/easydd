@@ -173,6 +173,7 @@ window.easydd = function () {
             this.hiddenInput.setAttribute('name', 'easyddHI');
             this.hiddenInput.setAttribute('type', 'file');
             this.hiddenInput.setAttribute('id', 'easyddHi');
+            this.hiddenInput.multiple = true;
             this.context.appendChild(this.hiddenInput);
 
             this.hiddenInput.addEventListener('change', function (evt) {

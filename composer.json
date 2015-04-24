@@ -1,0 +1,12 @@
+{
+  "name": "cookiekiller/easydd",
+  "description": "Easy dropzone library to get a dragzone HTML5 powered dropzone for files.",
+  "minimum-stability": "stable",
+  "license": "AGPLv3",
+  "authors": [
+    {
+      "name": "Michael Falk Spahn",
+      "email": "kontakt@michaelspahn.de"
+    }
+  ]
+}

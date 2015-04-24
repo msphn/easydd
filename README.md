@@ -1,6 +1,14 @@
 # EasyDD - Easy Drop Zone
 This library provides a easy drop zone without losing control of the data.
 
+# Features
+
+* Drop one ore more files to a dropzone
+* Define maximum filesize
+* Define allowed mime types
+* No ajax just getting data from a dropzone
+* Upload files by clicking at the dropzone
+
 # Use it
 It's easy, just include src/easydd.js and easydd.css in your HTML.
 

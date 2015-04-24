@@ -25,10 +25,15 @@ Initialize is like that:
 
 And to use all these awesome data you receive, add a callback function in the callback parameter.
 
-If you don't like limits, just remove maxSize and allowedMimeTypes, every file will passed now to you callback function.
+If you don't like limits, just remove maxSize and allowedMimeTypes, every file will be passed now to your callback function.
+
+# Composer
+If you like to get the latest version automatically, just add the composer repository.
+
+`composer require cookiekiller/easydd @dev-master`
 
 # Works with
-Current Firefox and Chrome. Haven't tested with any other browser yet.
+Currently Firefox and Chrome. Haven't tested with any other browser yet.
 
 # Contributing?
 Please support that library by testing and improving.

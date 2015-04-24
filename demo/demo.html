@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Easy Drag & Drop Demo</title>
+    <link href="../src/easydd.css" media="all" rel="stylesheet" />
+    <meta name="author" content="Michael F. Spahn - kontakt@michaelspahn.de">
+</head>
+<body>
+
+<!-- Render to that div -->
+<div id="dd"></div>
+
+<script src="../src/easydd.js"></script>
+<script type="application/javascript">
+    (function () {
+        // Callback function every submitted file is given to for further processing
+        var callbackTest = function(data) {
+            // data is -1 for wrong format, -2 if too big or data string if succeed
+            if (data == -1 || data == -2) {
+                // Something is wrong!
+                dd.setText('Please choose another file.');
+            } else {
+                // Everything is good!
+                dd.setText('Drop or Click here!');
+            }
+
+            // Echo data string to console it's up to you what you do with it probably render it to an image element?
+            console.warn(data);
+        };
+
+        // Initialize easyDD
+        var dd = easydd.create({
+            // HTML ID of an existing div to render to
+            elementId: 'dd',
+            // Centered text inside the div?
+            text: 'Drop or Click here!',
+            // Max file size in kb
+            maxSize: 250,
+            // Array of allowed mimetypes
+            allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif'],
+            // Callback function see callbackTest above
+            callback: callbackTest
+        });
+    }());
+</script>
+</body>
+</html>

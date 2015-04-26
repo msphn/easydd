@@ -1,6 +1,6 @@
 {
   "name": "cookiekiller/easydd",
-  "description": "Easy dropzone library to get a dragzone HTML5 powered dropzone for files.",
+  "description": "easyDD is a library to get HTML5 powered dropzones the easy way.",
   "minimum-stability": "stable",
   "license": "AGPLv3",
   "authors": [

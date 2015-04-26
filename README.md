@@ -44,6 +44,7 @@ If you like to get the latest version automatically, just add the composer repos
 I verified:
 * Firefox 37+
 * Chrome 42+
+* Midori 0.5.9 (Apple WebKit)
 
 Haven't tested with any other browser yet.
 

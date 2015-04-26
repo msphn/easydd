@@ -47,6 +47,7 @@ I verified:
 * Firefox 37+
 * Chrome 42+
 * Midori 0.5.9 (Apple WebKit)
+* Internet Explorer 11 (11.0.9600.17728)
 
 Haven't tested with any other browser yet.
 

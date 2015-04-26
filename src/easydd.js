@@ -105,7 +105,6 @@ window.easydd = function () {
 
         if (evt.dataTransfer) {
             var files = evt.dataTransfer.files;
-
         } else {
             var files = evt.target.files;
         }
@@ -196,7 +195,9 @@ window.easydd = function () {
      */
     easyDD.prototype.onClick = function (evt) {
         this.addHiddenInput();
+        console.warn("click stuff");
         this.hiddenInput.click();
+        this.hiddenInput = null;
     };
 
     /**

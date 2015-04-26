@@ -1,6 +1,8 @@
 # EasyDD - Easy Drop Zone
 This library provides a easy drop zone without losing control of the data.
 
+Like to see the demo live? http://cookiekiller.github.io/easydd/
+
 # Features
 
 * Drop one ore more files to a dropzone

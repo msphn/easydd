@@ -10,10 +10,16 @@
 
 <!-- Render to that div -->
 <div id="dd"></div>
+<div id="example" style="margin: 5px; width: 500px;"></div>
 
 <script src="../src/easydd.js"></script>
 <script type="application/javascript">
     (function () {
+        /**
+         * This is a really easy example how you can use easydd to drop images and render them to your website
+         *
+         * Of course you could collect images, show them and submit them using ajax to your webserver and save them. :)
+         */
         // Callback function every submitted file is given to for further processing
         var callbackTest = function(data) {
             // data is -1 for wrong format, -2 if too big or data string if succeed
@@ -25,8 +31,20 @@
                 dd.setText('Drop or Click here!');
             }
 
-            // Echo data string to console it's up to you what you do with it probably render it to an image element?
-            console.warn(data);
+            // Create a new image element
+            var image = new Image();
+
+            // Set width to 200px
+            image.width = 200;
+
+            // Define function if image is loaded
+            image.onload = function() {
+                // Append image tag with data to example div
+                document.getElementById('example').appendChild(image);
+            };
+
+            // Set src of image to the data returned by easydd! :)
+            image.src = data;
         };
 
         // Initialize easyDD

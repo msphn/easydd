@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/msphn/easydd/issues"
   },
-  "homepage": "https://github.com/msphn/easydd#readme"
+  "homepage": "https://github.com/msphn/easydd#readme",
+  "main": "src/easydd.js"
 }

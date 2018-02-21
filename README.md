@@ -19,7 +19,7 @@ Create an empty div and give it an id.
 Initialize is like that:
 ```javascript
     // Initialize easyDD
-    var dd = easydd.create({
+    var dd = new easydd({
         // HTML ID of an existing div to render to
         elementId: 'dd',
         // Centered text inside the div?
@@ -40,7 +40,7 @@ If you don't like limits, just remove maxSize and allowedMimeTypes, every file w
 # Composer
 If you like to get the latest version automatically, just add the composer repository.
 
-`composer require cookiekiller/easydd @dev-master`
+`composer require msphn/easydd @dev-master`
 
 # Works with
 I verified:

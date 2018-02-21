@@ -1,7 +1,7 @@
 # EasyDD - Easy Drop Zone
 This library provides a easy drop zone without losing control of the data.
 
-Like to see the demo live? http://cookiekiller.github.io/easydd/
+Like to see the demo live? http://msphn.github.io/easydd/
 
 # Features
 

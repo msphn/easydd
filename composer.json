@@ -2,7 +2,7 @@
   "name": "msphn/easydd",
   "description": "easyDD is a library to get HTML5 powered dropzones the easy way.",
   "minimum-stability": "stable",
-  "license": "AGPLv3",
+  "license": "AGPL-3.0-or-later",
   "authors": [
     {
       "name": "Michael Falk Spahn",

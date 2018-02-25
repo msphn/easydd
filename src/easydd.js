@@ -1,7 +1,7 @@
 /**
  * Easy Drag and Drop Zone
  *
- * @author Michael F. Spahn <michael@spahn.me>
+ * @author Michael Spahn <michael@spahn.me>
  * @license https://www.gnu.org/licenses/agpl-3.0.html GNU Affero Public License Version 3
  */
 easydd = function (c) {
@@ -34,6 +34,21 @@ easydd = function (c) {
     }
 };
 easydd.prototype = {
+    /**
+     * Invalid mimetype const
+     */
+    INVALID_MIMETYPE: -1,
+
+    /**
+     * Invalid filesize const
+     */
+    INVALID_FILESIZE: -2,
+
+    /**
+     * Promise
+     */
+    promise: null,
+
     /**
      * Div Element to render drop zone to
      *
@@ -133,7 +148,7 @@ easydd.prototype = {
                     // Check for mimetype if enabled
                     if (me.config.allowedMimeTypes.length > 0) {
                         if (me.config.allowedMimeTypes.indexOf(file.type) === -1) {
-                            me.config.callback(-1);
+                            me.config.callback(this.INVALID_MIMETYPE);
                             return;
                         }
                     }
@@ -141,7 +156,7 @@ easydd.prototype = {
                     // Check for filesize if enabled
                     if (me.config.maxSize > 0) {
                         if ((file.size / 1024) > me.config.maxSize) {
-                            me.config.callback(-2);
+                            me.config.callback(this.INVALID_FILESIZE);
                             return;
                         }
                     }
@@ -181,9 +196,8 @@ easydd.prototype = {
      * Event listener on click
      *
      * @private
-     * @param evt
      */
-    onClick: function (evt) {
+    onClick: function () {
         this.addHiddenInput();
         this.hiddenInput.click();
         this.hiddenInput = null;
@@ -196,7 +210,7 @@ easydd.prototype = {
      * @param text
      */
     setText: function (text) {
-        if (this.span == null) {
+        if (this.span === null) {
             this.span = document.createElement('span');
             this.span.classList.add('easyDDspan');
             this.context.appendChild(this.span);

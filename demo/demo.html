@@ -22,8 +22,8 @@
          */
             // Callback function every submitted file is given to for further processing
         var callbackTest = function (data) {
-                // data is -1 for wrong format, -2 if too big or data string if succeed
-                if (data === -1 || data === -2) {
+                // data is easydd.prototype.INVALID_MIMETYPE for wrong format, easydd.prototype.INVALID_FILESIZE if too big or data string if succeed
+                if (data === easydd.prototype.INVALID_MIMETYPE || data === easydd.prototype.INVALID_FILESIZE) {
                     // Something is wrong!
                     dd.setText('Please choose another file.');
                 } else {

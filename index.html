@@ -26,6 +26,7 @@
                 if (data === easydd.prototype.INVALID_MIMETYPE || data === easydd.prototype.INVALID_FILESIZE) {
                     // Something is wrong!
                     dd.setText('Please choose another file.');
+                    return;
                 } else {
                     // Everything is good!
                     dd.setText('Drop or Click here!');

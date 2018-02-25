@@ -21,34 +21,34 @@
          * Of course you could collect images, show them and submit them using ajax to your webserver and save them. :)
          */
         // Callback function every submitted file is given to for further processing
-        var callbackTest = function(data) {
-            // data is -1 for wrong format, -2 if too big or data string if succeed
-            if (data == -1 || data == -2) {
-                // Something is wrong!
-                dd.setText('Please choose another file.');
-            } else {
-                // Everything is good!
-                dd.setText('Drop or Click here!');
-            }
+        var callbackTest = function (data) {
+                // data is easydd.prototype.INVALID_MIMETYPE for wrong format, easydd.prototype.INVALID_FILESIZE if too big or data string if succeed
+                if (data === easydd.prototype.INVALID_MIMETYPE || data === easydd.prototype.INVALID_FILESIZE) {
+                    // Something is wrong!
+                    dd.setText('Please choose another file.');
+                } else {
+                    // Everything is good!
+                    dd.setText('Drop or Click here!');
+                }
 
-            // Create a new image element
-            var image = new Image();
+                // Create a new image element
+                var image = new Image();
 
-            // Set width to 200px
-            image.width = 200;
+                // Set width to 200px
+                image.width = 200;
 
-            // Define function if image is loaded
-            image.onload = function() {
-                // Append image tag with data to example div
-                document.getElementById('example').appendChild(image);
+                // Define function if image is loaded
+                image.onload = function () {
+                    // Append image tag with data to example div
+                    document.getElementById('example').appendChild(image);
+                };
+
+                // Set src of image to the data returned by easydd! :)
+                image.src = data;
             };
 
-            // Set src of image to the data returned by easydd! :)
-            image.src = data;
-        };
-
         // Initialize easyDD
-        var dd = easydd.create({
+        var dd = new easydd({
             // HTML ID of an existing div to render to
             elementId: 'dd',
             // Centered text inside the div?

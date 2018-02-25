@@ -1,17 +1,61 @@
 /**
  * Easy Drag and Drop Zone
  *
- * @author Michael F. Spahn <kontakt@michaelspahn.de>
+ * @author Michael Spahn <michael@spahn.me>
  * @license https://www.gnu.org/licenses/agpl-3.0.html GNU Affero Public License Version 3
  */
-window.easydd = function () {
+easydd = function (c) {
+    this.context = document.getElementById(c.elementId);
+    this.config = c;
+
+    if (this.config.text) {
+        this.setText(this.config.text);
+    }
+
+    if (this.context !== undefined) {
+        this.context.addEventListener('dragover', function (evt) {
+            this.onDragover(evt);
+        }.bind(this), false);
+
+        this.context.addEventListener('drop', function (evt) {
+            if (typeof this.config.callback !== 'function') {
+                this.config.callback = function (data) {
+                };
+            }
+
+            this.onDrop(evt, this);
+        }.bind(this), false);
+
+        this.context.addEventListener('click', function (evt) {
+            this.onClick(evt);
+        }.bind(this), false);
+
+        this.context.classList.add('easyDD');
+    }
+};
+easydd.prototype = {
+    /**
+     * Invalid mimetype const
+     */
+    INVALID_MIMETYPE: -1,
+
+    /**
+     * Invalid filesize const
+     */
+    INVALID_FILESIZE: -2,
+
+    /**
+     * Promise
+     */
+    promise: null,
+
     /**
      * Div Element to render drop zone to
      *
      * @private
      * @type {null}
      */
-    easyDD.prototype.context = null;
+    context: null,
 
     /**
      * Text span inside the drop zone
@@ -19,7 +63,7 @@ window.easydd = function () {
      * @private
      * @type {null}
      */
-    easyDD.prototype.span = null;
+    span: null,
 
     /**
      * Hidden input field
@@ -27,7 +71,7 @@ window.easydd = function () {
      * @private
      * @type {null}
      */
-    easyDD.prototype.hiddenInput = null;
+    hiddenInput: null,
 
     /**
      * Config
@@ -35,7 +79,7 @@ window.easydd = function () {
      * @private
      * @type {{}}
      */
-    easyDD.prototype.config = {};
+    config: {},
 
     /**
      * Contains all uploaded files
@@ -43,43 +87,7 @@ window.easydd = function () {
      * @private
      * @type {Array}
      */
-    easyDD.prototype.fileData = [];
-
-    /**
-     * Constructor
-     *
-     * @param c
-     */
-    function easyDD(c) {
-        this.context = document.getElementById(c.elementId);
-        this.config = c;
-
-        if (this.config.text) {
-            this.setText(this.config.text);
-        }
-
-        if (this.context !== undefined) {
-            this.context.addEventListener('dragover', function (evt) {
-                this.onDragover(evt, this);
-            }.bind(this), false);
-
-            this.context.addEventListener('drop', function (evt) {
-                if (typeof this.config.callback === 'function') {
-                    var cb = this.config.callback;
-                } else {
-                    var cb = function (data) {};
-                }
-
-                this.onDrop(evt, this, cb);
-            }.bind(this), false);
-
-            this.context.addEventListener('click', function (evt) {
-                this.onClick(evt);
-            }.bind(this), false);
-
-            this.context.classList.add('easyDD');
-        }
-    }
+    fileData: [],
 
     /**
      * Event listener if drag over
@@ -87,11 +95,11 @@ window.easydd = function () {
      * @private
      * @param evt
      */
-    easyDD.prototype.onDragover = function (evt) {
+    onDragover: function (evt) {
         evt.stopPropagation();
         evt.preventDefault();
         evt.dataTransfer.dropEffect = 'copy';
-    };
+    },
 
     /**
      * Event listener on drop
@@ -99,20 +107,22 @@ window.easydd = function () {
      * @private
      * @param evt
      */
-    easyDD.prototype.onDrop = function (evt, that, cb) {
+    onDrop: function (evt) {
+        var files;
+
         evt.stopPropagation();
         evt.preventDefault();
 
         if (evt.dataTransfer) {
-            var files = evt.dataTransfer.files;
+            files = evt.dataTransfer.files;
         } else {
-            var files = evt.target.files;
+            files = evt.target.files;
         }
 
         for (var i = 0; i < files.length; i++) {
-            this.saveFileDataToArray(files[i], that, cb);
+            this.saveFileDataToArray(files[i]);
         }
-    };
+    },
 
 
     /**
@@ -121,37 +131,38 @@ window.easydd = function () {
      * @public
      * @returns {Array}
      */
-    easyDD.prototype.getData = function () {
+    getData: function () {
         return this.fileData;
-    };
+    },
 
     /**
      * @private
      */
-    easyDD.prototype.saveFileDataToArray = function (data, that, cb) {
-        var reader = new FileReader();
+    saveFileDataToArray: function (data) {
+        var reader = new FileReader(),
+            me = this;
 
         try {
             reader.onload = (function (file) {
                 return function (e) {
                     // Check for mimetype if enabled
-                    if (that.config.allowedMimeTypes.length > 0) {
-                        if (that.config.allowedMimeTypes.indexOf(file.type) === -1) {
-                            cb(-1);
+                    if (me.config.allowedMimeTypes.length > 0) {
+                        if (me.config.allowedMimeTypes.indexOf(file.type) === -1) {
+                            me.config.callback(this.INVALID_MIMETYPE);
                             return;
                         }
                     }
 
                     // Check for filesize if enabled
-                    if (that.config.maxSize > 0) {
-                        if ((file.size / 1024) > that.config.maxSize) {
-                            cb(-2);
+                    if (me.config.maxSize > 0) {
+                        if ((file.size / 1024) > me.config.maxSize) {
+                            me.config.callback(this.INVALID_FILESIZE);
                             return;
                         }
                     }
 
-                    cb(e.target.result);
-                    that.fileData.push(e.target.result);
+                    me.config.callback(e.target.result);
+                    me.fileData.push(e.target.result);
                 };
             })(data);
 
@@ -159,14 +170,14 @@ window.easydd = function () {
         } catch (e) {
             console.warn('Something went wrong.');
         }
-    };
+    },
 
     /**
      * Render hidden input field to fake file upload on click
      *
      * @private
      */
-    easyDD.prototype.addHiddenInput = function () {
+    addHiddenInput: function () {
         if (this.hiddenInput === null) {
             this.hiddenInput = document.createElement('input');
             this.hiddenInput.setAttribute('name', 'easyddHI');
@@ -176,29 +187,21 @@ window.easydd = function () {
             this.context.appendChild(this.hiddenInput);
 
             this.hiddenInput.addEventListener('change', function (evt) {
-                if (typeof this.config.callback === 'function') {
-                    var cb = this.config.callback;
-                } else {
-                    var cb = function (data) {};
-                }
-
-                this.onDrop(evt, this, cb);
+                this.onDrop(evt);
             }.bind(this), false);
         }
-    };
+    },
 
     /**
      * Event listener on click
      *
      * @private
-     * @param evt
      */
-    easyDD.prototype.onClick = function (evt) {
+    onClick: function () {
         this.addHiddenInput();
-        console.warn("click stuff");
         this.hiddenInput.click();
         this.hiddenInput = null;
-    };
+    },
 
     /**
      * Set text on dropzone
@@ -206,20 +209,13 @@ window.easydd = function () {
      * @public
      * @param text
      */
-    easyDD.prototype.setText = function (text) {
-        if (this.span == null) {
+    setText: function (text) {
+        if (this.span === null) {
             this.span = document.createElement('span');
             this.span.classList.add('easyDDspan');
             this.context.appendChild(this.span);
         }
 
         this.span.innerHTML = text;
-    };
-
-    var easydd = {
-        create: function (c) {
-            return new easyDD(c);
-        }
-    };
-    return easydd;
-}();
+    }
+};

@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <title>Easy Drag &amp; Drop Demo</title>
     <link href="easydd.css" media="all" rel="stylesheet" />
-    <meta name="author" content="Michael F. Spahn - kontakt@michaelspahn.de">
+    <meta name="author" content="Michael Spahn - michael@spahn.me">
+    <style>
+            .image {
+                border: 1px solid black;
+                margin-right: 5px;
+                margin-bottom: 5px;
+                float: left;
+            }
+    </style>
 </head>
 <body>
 
 <!-- Render to that div -->
 <div id="dd"></div>
-<div id="example" style="margin: 5px; width: 500px;"></div>
+<div id="example"></div>
 
 <script src="easydd.js"></script>
 <script type="application/javascript">
@@ -29,7 +37,7 @@
                     return;
                 } else {
                     // Everything is good!
-                    dd.setText('Drop or Click here!');
+                    dd.setText('Drop or click here!');
                 }
 
                 // Create a new image element
@@ -37,6 +45,7 @@
 
                 // Set width to 200px
                 image.width = 200;
+                image.className = "image"
 
                 // Define function if image is loaded
                 image.onload = function () {

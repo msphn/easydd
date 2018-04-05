@@ -1,17 +1,17 @@
 /**
  * Easy Drag and Drop Zone
  *
- * @author Michael F. Spahn <kontakt@michaelspahn.de>
+ * @author Michael Spahn <michael@spahn.me>
  * @license https://www.gnu.org/licenses/agpl-3.0.html GNU Affero Public License Version 3
  */
 
 .easyDD {
     width: 200px;
     height: 200px;
-    border: 5px solid grey;
-    border-radius: 10px;
-    background: lightgrey;
+    background: rgb(56, 255, 105);
     position: relative;
+    box-shadow: 0 0 3px #888888;
+    border-radius: 5px;
 }
 
 input#easyddHi {
@@ -22,6 +22,7 @@ span.easyDDspan {
     font-family: sans-serif;
     font-size: 1.2em;
     display: block;
+    position: relative;
     text-align: center;
-    margin-top: calc(50% - 1.2em / 2);
+    top: calc(50% - 1.2em / 2);
 }

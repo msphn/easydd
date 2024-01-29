@@ -37,10 +37,9 @@ And to use all these awesome data you receive, add a callback function in the ca
 
 If you don't like limits, just remove maxSize and allowedMimeTypes, every file will be passed now to your callback function.
 
-# Composer
-If you like to get the latest version automatically, just add the composer repository.
+# Installation
 
-`composer require msphn/easydd @dev-master`
+`npm i easydd`
 
 # Works with
 I verified:
